@@ -26,8 +26,9 @@ public class EmployerController {
 
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
-                                    Errors errors, Model model) {
+                                         Errors errors, Model model) {
         if (errors.hasErrors()) {
+            model.addAttribute("errors", errors);
             return "employers/add";
         }
         employerRepository.save(newEmployer);
